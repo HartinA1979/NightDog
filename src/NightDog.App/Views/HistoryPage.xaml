@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="NightDog.App.Views.HistoryPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:vm="clr-namespace:NightDog.App.ViewModels"
+    x:DataType="vm:HistoryViewModel"
+    Title="Verlauf">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24,20,24,24" Spacing="16">
+
+            <VerticalStackLayout Spacing="2">
+                <Label Text="Deine Nächte im Überblick" Style="{StaticResource Caption}" />
+                <Label Text="Verlauf" Style="{StaticResource H1}" />
+            </VerticalStackLayout>
+
+            <Border Style="{StaticResource InfoBox}">
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                    <Image Source="icon_info.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Start">
+                        <Image.Behaviors>
+                            <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Dark={StaticResource PrimaryBrightDark}, Light={StaticResource PrimaryBrightLight}}" />
+                        </Image.Behaviors>
+                    </Image>
+                    <Label Grid.Column="1" Text="Trends über Woche, Monat und Jahr folgen in Phase 7." Style="{StaticResource Body}" FontSize="13" />
+                </Grid>
+            </Border>
+
+            <Button Text="Beispiel-Nacht öffnen" Style="{StaticResource SecondaryButton}" Command="{Binding OpenSampleNightCommand}" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

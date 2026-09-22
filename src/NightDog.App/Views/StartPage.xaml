@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="NightDog.App.Views.StartPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:vm="clr-namespace:NightDog.App.ViewModels"
+    x:DataType="vm:StartViewModel"
+    Title="Nacht">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24,20,24,24" Spacing="16">
+
+            <!-- Kopfzeile -->
+            <VerticalStackLayout Spacing="2">
+                <Label Text="{Binding Today}" Style="{StaticResource Caption}" />
+                <Label Text="{Binding Greeting}" Style="{StaticResource H1}" />
+            </VerticalStackLayout>
+
+            <!-- Start-Button -->
+            <VerticalStackLayout Spacing="14" Padding="0,24,0,8">
+                <Border
+                    WidthRequest="188"
+                    HeightRequest="188"
+                    StrokeThickness="0"
+                    StrokeShape="Ellipse"
+                    HorizontalOptions="Center"
+                    SemanticProperties.Description="Nacht starten">
+                    <Border.Background>
+                        <RadialGradientBrush Center="0.5,0.35" Radius="0.75">
+                            <GradientStop Color="{StaticResource PrimaryGradientTop}" Offset="0" />
+                            <GradientStop Color="{StaticResource Primary}" Offset="0.55" />
+                            <GradientStop Color="{StaticResource PrimaryDark}" Offset="1" />
+                        </RadialGradientBrush>
+                    </Border.Background>
+                    <Border.Shadow>
+                        <Shadow Brush="{StaticResource Primary}" Offset="0,16" Radius="40" Opacity="0.45" />
+                    </Border.Shadow>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding StartNightCommand}" />
+                    </Border.GestureRecognizers>
+                    <VerticalStackLayout Spacing="8" VerticalOptions="Center" HorizontalOptions="Center">
+                        <Image Source="icon_moon.png" WidthRequest="44" HeightRequest="44" />
+                        <Label Text="Nacht starten" FontFamily="InterBold" FontSize="18" TextColor="{StaticResource White}" />
+                    </VerticalStackLayout>
+                </Border>
+                <Label
+                    Text="Handy 30–50 cm neben den Kopf legen"
+                    Style="{StaticResource Caption}"
+                    HorizontalOptions="Center"
+                    Margin="0,12,0,0" />
+                <Label
+                    Text="{Binding StatusMessage}"
+                    IsVisible="{Binding StatusMessage, Converter={toolkit:IsStringNotNullOrEmptyConverter}}"
+                    Style="{StaticResource Caption}"
+                    TextColor="{AppThemeBinding Dark={StaticResource AccentDark}, Light={StaticResource AccentLight}}"
+                    HorizontalOptions="Center" />
+            </VerticalStackLayout>
+
+            <!-- Optionen für die Nacht -->
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="14">
+
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                        <Border Style="{StaticResource IconBadge}">
+                            <Image Source="icon_mic.png" WidthRequest="20" HeightRequest="20">
+                                <Image.Behaviors>
+                                    <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Dark={StaticResource PrimaryBrightDark}, Light={StaticResource PrimaryBrightLight}}" />
+                                </Image.Behaviors>
+                            </Image>
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                            <Label Text="Schnarchen aufnehmen" Style="{StaticResource ItemTitle}" />
+                            <Label Text="{Binding RecordingDescription}" Style="{StaticResource Caption}" />
+                        </VerticalStackLayout>
+                        <Switch
+                            Grid.Column="2"
+                            IsToggled="{Binding IsRecordingEnabled}"
+                            VerticalOptions="Center"
+                            SemanticProperties.Description="Schnarchen aufnehmen" />
+                    </Grid>
+
+                    <BoxView Style="{StaticResource Divider}" />
+
+                    <VerticalStackLayout Spacing="10">
+                        <HorizontalStackLayout Spacing="8">
+                            <Image Source="icon_clock.png" WidthRequest="18" HeightRequest="18" VerticalOptions="Center">
+                                <Image.Behaviors>
+                                    <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Dark={StaticResource TextSoftDark}, Light={StaticResource TextSoftLight}}" />
+                                </Image.Behaviors>
+                            </Image>
+                            <Label Text="Start-Verzögerung" Style="{StaticResource ItemTitle}" FontSize="14" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+
+                        <Border Style="{StaticResource SegmentTrack}">
+                            <FlexLayout Direction="Row" BindableLayout.ItemsSource="{Binding DelayOptions}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="vm:DelayOption">
+                                        <Border Style="{StaticResource Segment}" FlexLayout.Grow="1" FlexLayout.Basis="0" Margin="2,0">
+                                            <Border.Triggers>
+                                                <DataTrigger TargetType="Border" Binding="{Binding IsSelected}" Value="True">
+                                                    <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                                                </DataTrigger>
+                                            </Border.Triggers>
+                                            <Border.GestureRecognizers>
+                                                <TapGestureRecognizer
+                                                    Command="{Binding SelectDelayCommand, Source={RelativeSource AncestorType={x:Type vm:StartViewModel}}, x:DataType=vm:StartViewModel}"
+                                                    CommandParameter="{Binding .}" />
+                                            </Border.GestureRecognizers>
+                                            <Label Text="{Binding Label}" Style="{StaticResource SegmentLabel}">
+                                                <Label.Triggers>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="True">
+                                                        <Setter Property="TextColor" Value="{StaticResource White}" />
+                                                    </DataTrigger>
+                                                </Label.Triggers>
+                                            </Label>
+                                        </Border>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </FlexLayout>
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <BoxView Style="{StaticResource Divider}" />
+
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                        <Border Style="{StaticResource IconBadge}">
+                            <Image Source="icon_alarm.png" WidthRequest="20" HeightRequest="20">
+                                <Image.Behaviors>
+                                    <toolkit:IconTintColorBehavior TintColor="{AppThemeBinding Dark={StaticResource PrimaryBrightDark}, Light={StaticResource PrimaryBrightLight}}" />
+                                </Image.Behaviors>
+                            </Image>
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                            <Label Text="Auto-Stopp" Style="{StaticResource ItemTitle}" />
+                            <Label Text="Überwachung endet automatisch" Style="{StaticResource Caption}" />
+                        </VerticalStackLayout>
+                        <TimePicker Grid.Column="2" Time="{Binding AutoStopTime}" Format="HH:mm" VerticalOptions="Center" />
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

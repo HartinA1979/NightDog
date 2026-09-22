@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+	<!-- Berechtigungen für Mikrofon und Foreground-Service folgen in Phase 1.
+	     Keine INTERNET-Berechtigung: Alle Daten bleiben auf dem Gerät (Debug-Builds ergänzen sie automatisch). -->
+	<application
+		android:allowBackup="true"
+		android:icon="@mipmap/appicon"
+		android:roundIcon="@mipmap/appicon_round"
+		android:label="NightDog"
+		android:supportsRtl="true" />
+</manifest>

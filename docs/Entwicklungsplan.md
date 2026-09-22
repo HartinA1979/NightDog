@@ -79,6 +79,8 @@ Episoden-Detektor (Hysterese, Glättung)                    │
 
 **Ergebnis:** Leere, lauffähige App mit Navigation; Tests laufen in CI.
 
+**Status: umgesetzt.** App-ID `at.havision.nightdog`. Farben, Styles, Schrift (Inter) und Icons kommen aus dem [Designsystem](Designsystem.md). Das Theme (Dunkel/Hell/System) ist in den Einstellungen bereits umschaltbar. `NightDog.Ml.Tests` wird zusammen mit dem Klassifikator in Phase 3 angelegt.
+
 ### Phase 1 – Audio-Aufnahme im Hintergrund (Kernrisiko zuerst)
 Das ist der technisch kritischste Teil, deshalb kommt er vor die Erkennung.
 
