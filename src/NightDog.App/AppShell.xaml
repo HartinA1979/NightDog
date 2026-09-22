@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="NightDog.App.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:views="clr-namespace:NightDog.App.Views"
+    Title="NightDog"
+    Shell.NavBarIsVisible="False">
+
+    <Shell.Behaviors>
+        <toolkit:StatusBarBehavior
+            StatusBarColor="{AppThemeBinding Dark={StaticResource BgDark}, Light={StaticResource BgLight}}"
+            StatusBarStyle="{AppThemeBinding Dark=LightContent, Light=DarkContent}" />
+    </Shell.Behaviors>
+
+    <TabBar>
+        <ShellContent
+            Title="Nacht"
+            Icon="tab_night.png"
+            Route="start"
+            ContentTemplate="{DataTemplate views:StartPage}" />
+        <ShellContent
+            Title="Verlauf"
+            Icon="tab_history.png"
+            Route="history"
+            ContentTemplate="{DataTemplate views:HistoryPage}" />
+        <ShellContent
+            Title="Tagebuch"
+            Icon="tab_diary.png"
+            Route="diary"
+            ContentTemplate="{DataTemplate views:DiaryPage}" />
+        <ShellContent
+            Title="Einstellungen"
+            Icon="tab_settings.png"
+            Route="settings"
+            ContentTemplate="{DataTemplate views:SettingsPage}" />
+    </TabBar>
+
+</Shell>

@@ -1,0 +1,11 @@
+<svg width="456" height="456" viewBox="0 0 456 456" xmlns="http://www.w3.org/2000/svg">
+    <!-- Mondsichel (Primär hell) mit Schallwellen (Akzent) -->
+    <g transform="translate(228 228) scale(1.2) translate(-228 -228)">
+    <path d="M262 290a92 92 0 1 1-96-146 72 72 0 0 0 96 146z" fill="#4D94F0" />
+    <g stroke="#2DD4BF" stroke-width="14" stroke-linecap="round" fill="none">
+        <path d="M276 196v44" />
+        <path d="M306 178v80" />
+        <path d="M336 202v32" />
+    </g>
+    </g>
+</svg>
