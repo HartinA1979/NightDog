@@ -1,4 +1,5 @@
 # NightDog
 Überwachung ob geschnarcht wird
 
-Siehe [Entwicklungsplan](docs/Entwicklungsplan.md).
+- [Entwicklungsplan](docs/Entwicklungsplan.md)
+- [Designsystem](docs/Designsystem.md)
